@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "us-election-prediction"
+version = "0.1.0"
+description = "Bayesian prediction of US House district election results (Census + Polymarket fusion)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pymc>=5.0",
+    "arviz>=0.18",
+    "polars>=0.20",
+    "duckdb>=0.10",
+    "scikit-learn>=1.4",
+    "numpy>=1.26",
+    "pandas>=2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "black>=24.0",
+    "ruff>=0.4",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.black]
+line-length = 88
+target-version = ["py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
